@@ -1,5 +1,4 @@
 import os
-import matplotlib.pyplot as plt
 import streamlit as st
 from openai import AzureOpenAI
 import base64
