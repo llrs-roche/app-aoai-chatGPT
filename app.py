@@ -861,7 +861,19 @@ async def ensure_cosmos():
 
 async def generate_title(conversation_messages) -> str:
     ## make sure the messages are sorted by _ts descending
-    title_prompt = "Summarize the conversation so far into a 4-word or less title. Do not use any quotation marks or punctuation. Do not include any other commentary or description."
+    title_prompt = (
+            "You are an AI assistant, expert in finance and helps people find information about this topic.\n"
+            "Your responses must be concise and brief so you should limit responses to one line whenever possible, "
+            "avoid adding unnecessary details or contextual information.\n"
+            "Provide only the exact answer to the user’s question or request, without additional explanations.\n"
+            "If the input lacks sufficient detail for an accurate response, ask specifically for missing information "
+            "using prompts like 'Could you provide more details on…?', 'Do you mean [brief context]?'\n"
+            "For ambiguous queries, clarify details with direct questions before responding.\n"
+            "If a topic requires extensive information, summarize in one line and offer the user the choice to request more.\n"
+            "If a question has already been answered or the user requests clarification, avoid repeating information, "
+            "responding instead with the precise data needed.\n"
+            "Detect the language of the user's question and respond in the same language, ensuring seamless communication across languages."
+        )
 
     messages = [
         {"role": msg["role"], "content": msg["content"]}
